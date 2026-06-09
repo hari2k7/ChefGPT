@@ -8,7 +8,7 @@ function Navbar() {
     };
 
     return (
-        <nav className="w-full flex items-center justify-between px-10 py-4 bg-gradient-to-r from-[#2b1b12] to-[#1f140d] text-white shadow-md">
+        <nav className="w-full flex items-center justify-between px-10 py-4 bg-linear-to-r from-[#2b1b12] to-[#1f140d] text-white shadow-md">
 
             {/* Left - Logo */}
             <div>

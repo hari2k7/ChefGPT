@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import api from "../services/api";
+import RecipeCard from "../components/RecipeCard";
 
 function Home() {
 
@@ -44,7 +45,7 @@ function Home() {
                 ChefGPT crafts the perfect recipe instantly.
             </p>
 
-            <div className="mt-10 w-full max-w-[760px]">
+            <div className="mt-10 w-full max-w-190">
                 <div className="flex items-center rounded-[28px] border border-[#e6d8c8] bg-white p-2 shadow-md">
                     <input
                         type="text"
@@ -58,7 +59,7 @@ function Home() {
                         className="flex h-14 items-center gap-2 rounded-[20px] bg-[#e7b75c] px-8 font-semibold text-white transition-all duration-200 hover:bg-[#dda947] hover:shadow-lg"
                         onClick={handleGenerate}
                     >
-                        🔍 Generate
+                        Generate
                     </button>
                 </div>
 
@@ -76,9 +77,7 @@ function Home() {
 
                 {recipe && (
                     <div className="mt-8 w-full rounded-2xl border border-[#e6d8c8] bg-white p-6 shadow-md">
-                        <pre className="overflow-auto whitespace-pre-wrap">
-                            {JSON.stringify(recipe, null, 2)}
-                        </pre>
+                        <RecipeCard recipe={recipe}/>
                     </div>
                 )}
 
