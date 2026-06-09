@@ -29,6 +29,19 @@ function Home() {
         }
     };
 
+    const handleDelete = async (recipeId) => {
+        try {
+            await api.delete(`/recipes/${recipeId}`);
+
+            setRecipes(prev =>
+                prev.filter(recipe => recipe._id !== recipeId)
+            );
+        } catch (err) {
+            console.error(err);
+            alert("Failed to delete recipe");
+        }
+    };
+
     return (
         <div className="flex flex-col items-center px-6 pt-24">
             <h1 className="text-center text-6xl md:text-7xl font-black leading-[1.05] tracking-tight text-[#2a1b17]">
@@ -77,7 +90,10 @@ function Home() {
 
                 {recipe && (
                     <div className="mt-8 w-full rounded-2xl border border-[#e6d8c8] bg-white p-6 shadow-md">
-                        <RecipeCard recipe={recipe}/>
+                        <RecipeCard
+                            recipe={recipe}
+                            onDelete={() => handleDelete(recipe._id)}
+                        />
                     </div>
                 )}
 
