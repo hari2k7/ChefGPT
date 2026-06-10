@@ -38,7 +38,7 @@ ${instructionsText}
             onClick={() => navigate(`/recipe/${recipe._id}`)}
         >
             {/* Header */}
-            <div className="relative bg-gradient-to-r from-[#2b1a10] to-[#5b371f] px-6 py-6 text-white">
+            <div className="relative bg-linear-to-r from-[#2b1a10] to-[#5b371f] px-6 py-6 text-white">
                 <button
                     className="absolute top-3 right-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 transition hover:bg-white/20"
                     onClick={(e) => {
@@ -50,7 +50,7 @@ ${instructionsText}
                     {recipe.isFavorite ? "❤️" : "🤍"}
                 </button>
 
-                <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#f5a623]">
+                <div className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-[#f5a623]">
                     {recipe.cuisine}
                 </div>
 
