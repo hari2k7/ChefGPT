@@ -50,8 +50,16 @@ function Home() {
         }
     };
 
+    const user = JSON.parse(
+        localStorage.getItem("user")
+    );
+
     return (
         <div className="flex flex-col items-center px-6 pt-24">
+            <p className="inline-flex items-center gap-2 mb-6 rounded-full border border-amber-200 bg-amber-50 px-4 py-1.5 text-[0.78rem] font-semibold uppercase tracking-[0.08em] text-amber-600">
+                👋 Welcome back, {user?.name}
+            </p>
+
             <h1 className="text-center text-6xl md:text-7xl font-black leading-[1.05] tracking-tight text-[#2a1b17]">
                 Your personal{" "}
                 <span className="italic text-[#d89410]">
