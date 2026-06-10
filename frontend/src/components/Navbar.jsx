@@ -6,6 +6,12 @@ function Navbar() {
     const navigate = useNavigate();
 
     const handleLogout = () => {
+        const confirmLogout = window.confirm(
+            "Are you sure you want to logout?"
+        );
+
+        if (!confirmLogout) return;
+
         localStorage.removeItem("token");
         localStorage.removeItem("user");
 
