@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 import { useNavigate, Navigate } from "react-router-dom";
+import ChefHat from "../assets/ChefHat.png";
 
 export default function Register() {
 
@@ -30,14 +31,13 @@ export default function Register() {
     return (
         <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4">
 
-            {/* Brand */}
-            <div className="mb-10 text-center">
-                <span className="text-2xl font-bold text-[#2c1a0e]" style={{ fontFamily: "'Georgia', serif" }}>
-                    Chef<span className="text-[#c89b3c]">GPT</span>
+            <div className=''>
+                <img src={ChefHat} alt="Chef" className="h-15 w-15" />
+                <span className="text-2xl font-bold font-Poppins text-[#D4AF37] ml-2">
+                    GPT
                 </span>
             </div>
 
-            {/* Card */}
             <div className="w-full max-w-sm">
                 <div className="mb-8 text-center">
                     <h1 className="text-3xl font-bold text-[#2c1a0e]" style={{ fontFamily: "'Georgia', serif" }}>
