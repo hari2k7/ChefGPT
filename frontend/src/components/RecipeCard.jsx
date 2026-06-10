@@ -2,9 +2,8 @@ import React from 'react'
 import { FaWhatsapp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
-function RecipeCard({ recipe, onDelete }) {
-    console.log("onDelete prop:", onDelete);
-    console.log("RecipeCard loaded");
+function RecipeCard({ recipe, onDelete, onFavorite }) {
+
     if (!recipe) return null;
 
     const navigate = useNavigate();
@@ -39,12 +38,23 @@ ${instructionsText}
             onClick={() => navigate(`/recipe/${recipe._id}`)}
         >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#2b1a10] to-[#5b371f] px-6 py-6 text-white relative ">
-                <div className="text-[11px] font-semibold tracking-[0.1em] uppercase text-[#f5a623] mb-2">
+            <div className="relative bg-gradient-to-r from-[#2b1a10] to-[#5b371f] px-6 py-6 text-white">
+                <button
+                    className="absolute top-3 right-3 flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 transition hover:bg-white/20"
+                    onClick={(e) => {
+                        e.stopPropagation();
+                        onFavorite();
+                    }}
+                    title={recipe.isFavorite ? "Remove from favorites" : "Add to favorites"}
+                >
+                    {recipe.isFavorite ? "❤️" : "🤍"}
+                </button>
+
+                <div className="mb-2 text-[11px] font-semibold uppercase tracking-[0.1em] text-[#f5a623]">
                     {recipe.cuisine}
                 </div>
 
-                <h2 className="font-serif text-[20px] font-bold text-white leading-[1.3]">
+                <h2 className="pr-12 font-serif text-[20px] font-bold leading-[1.3] text-white">
                     {recipe.title}
                 </h2>
             </div>

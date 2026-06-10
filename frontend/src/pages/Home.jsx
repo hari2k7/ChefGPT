@@ -32,13 +32,21 @@ function Home() {
     const handleDelete = async (recipeId) => {
         try {
             await api.delete(`/recipes/${recipeId}`);
-
-            setRecipes(prev =>
-                prev.filter(recipe => recipe._id !== recipeId)
-            );
+            setRecipe(null);
         } catch (err) {
             console.error(err);
-            alert("Failed to delete recipe");
+        }
+    };
+
+    const handleFavorite = async (recipeId) => {
+        try {
+            const response = await api.patch(
+                `/recipes/${recipeId}/favorite`
+            );
+
+            setRecipe(response.data);
+        } catch (err) {
+            console.error(err);
         }
     };
 
@@ -93,6 +101,7 @@ function Home() {
                         <RecipeCard
                             recipe={recipe}
                             onDelete={() => handleDelete(recipe._id)}
+                            onFavorite={() => handleFavorite(recipe._id)}
                         />
                     </div>
                 )}

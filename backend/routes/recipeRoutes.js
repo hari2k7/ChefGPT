@@ -13,6 +13,6 @@ router.post('/generate', generateRecipe)
 router.get('/',getAllRecipes)
 router.get('/:id',getRecipeById)
 router.delete('/:id',deleteRecipe)
-router.get('/:id/favorite',toggleFavorite)
+router.patch('/:id/favorite',toggleFavorite)
 
 export default router
