@@ -3,7 +3,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import "dotenv/config";
 import recipeRoutes from './routes/recipeRoutes.js'
-
+import authRoutes from "./routes/authRoutes.js";
 
 //dotenv.config()
 
@@ -20,6 +20,7 @@ app.get('/',(req,res) => {
 
 // Routes
 app.use("/api/recipes", recipeRoutes);
+app.use("/api/auth", authRoutes);
 
 mongoose
 .connect(process.env.MONGO_URI)

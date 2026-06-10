@@ -52,7 +52,7 @@ User request: ${prompt}`;
       return res.status(500).json({ error: "AI returned invalid format. Please try again." });
     }
 
-    const recipe = new Recipe({ ...recipeData, prompt: prompt.trim() });
+    const recipe = new Recipe({ ...recipeData, prompt: prompt.trim(), user: req.user._id, });
     const saved = await recipe.save();
     res.status(201).json(saved);
   } catch (err) {
@@ -64,7 +64,7 @@ User request: ${prompt}`;
 // GET /api/recipes
 export const getAllRecipes = async (req, res) => {
   try {
-    const recipes = await Recipe.find().sort({ createdAt: -1 });
+    const recipes = await Recipe.find({ user: req.user._id, })
     res.json(recipes);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -74,7 +74,7 @@ export const getAllRecipes = async (req, res) => {
 // GET /api/recipes/:id
 export const getRecipeById = async (req, res) => {
   try {
-    const recipe = await Recipe.findById(req.params.id);
+    const recipe = await Recipe.findOne({ _id: req.params.id, user: req.user._id, });
     if (!recipe) return res.status(404).json({ error: "Recipe not found" });
     res.json(recipe);
   } catch (err) {
@@ -85,7 +85,10 @@ export const getRecipeById = async (req, res) => {
 // DELETE /api/recipes/:id
 export const deleteRecipe = async (req, res) => {
   try {
-    const recipe = await Recipe.findByIdAndDelete(req.params.id);
+    const recipe = await Recipe.findOneAndDelete({
+      _id: req.params.id,
+      user: req.user._id,
+    });
     if (!recipe) return res.status(404).json({ error: "Recipe not found" });
     res.json({ message: "Recipe deleted successfully" });
   } catch (err) {
@@ -96,7 +99,10 @@ export const deleteRecipe = async (req, res) => {
 // PATCH /api/recipes/:id/favorite
 export const toggleFavorite = async (req, res) => {
   try {
-    const recipe = await Recipe.findById(req.params.id);
+    const recipe = await Recipe.findOne({
+      _id: req.params.id,
+      user: req.user._id,
+    });
     if (!recipe) return res.status(404).json({ error: "Recipe not found" });
     recipe.isFavorite = !recipe.isFavorite;
     await recipe.save();
