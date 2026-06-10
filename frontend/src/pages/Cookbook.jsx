@@ -7,6 +7,7 @@ function Cookbook() {
 
   const [recipes, setRecipes] = useState([]);
   const [showFavorites, setShowFavorites] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleDelete = async (recipeId) => {
     try {
@@ -48,9 +49,17 @@ function Cookbook() {
     }
   }
 
-  const displayedRecipes = showFavorites
-    ? recipes.filter(recipe => recipe.isFavorite)
-    : recipes;
+  const displayedRecipes = recipes.filter((recipe) => {
+    const matchesFavorite =
+      !showFavorites || recipe.isFavorite;
+
+    const matchesSearch =
+      recipe.title
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase());
+
+    return matchesFavorite && matchesSearch;
+  });
 
   useEffect(() => {
     fetchRecipes()
@@ -63,26 +72,42 @@ function Cookbook() {
         My Cookbook
       </h1>
 
-      <div className="mb-8 flex justify-center gap-4">
-        <button
-          onClick={() => setShowFavorites(false)}
-          className={`px-5 py-2.5 rounded-full font-medium transition-all duration-200 ${!showFavorites
-            ? "bg-amber-500 text-white shadow-md"
-            : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-            }`}
-        >
-          🍽️ All Recipes
-        </button>
+      <div className="mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-        <button
-          onClick={() => setShowFavorites(true)}
-          className={`px-5 py-2.5 rounded-full font-medium transition-all duration-200 ${showFavorites
-            ? "bg-red-500 text-white shadow-md"
-            : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
-            }`}
-        >
-          ❤️ Favorites
-        </button>
+        {/* Search */}
+        <div className="w-full md:max-w-md">
+          <input
+            type="text"
+            placeholder="Search recipes..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full rounded-xl border border-[#e8ddd0] bg-white px-4 py-3 text-[#2c2016] shadow-sm outline-none transition focus:border-amber-500 focus:ring-2 focus:ring-amber-100"
+          />
+        </div>
+
+        {/* Filters */}
+        <div className="flex justify-center gap-3">
+          <button
+            onClick={() => setShowFavorites(false)}
+            className={`px-5 py-2.5 rounded-full font-medium transition-all duration-200 ${!showFavorites
+                ? "bg-amber-500 text-white shadow-md"
+                : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+              }`}
+          >
+            🍽️ All Recipes
+          </button>
+
+          <button
+            onClick={() => setShowFavorites(true)}
+            className={`px-5 py-2.5 rounded-full font-medium transition-all duration-200 ${showFavorites
+                ? "bg-red-500 text-white shadow-md"
+                : "bg-white text-gray-600 border border-gray-200 hover:bg-gray-50"
+              }`}
+          >
+            ❤️ Favorites
+          </button>
+        </div>
+
       </div>
 
 
