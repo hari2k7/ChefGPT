@@ -71,62 +71,115 @@ ${instructionsText}
   };
 
   return (
-    <div className="mt-8 w-full max-w-4xl mx-auto rounded-3xl border border-[#e6d8c8] bg-white p-8 shadow-lg">
-      <h1 className="text-3xl font-bold text-[#2a1b17]">
-        {recipe.title}
-      </h1>
+    <div className="max-w-6xl mx-auto px-6 py-8">
+      {/* Back Button */}
+      <button
+        onClick={() => navigate("/cookbook")}
+        className="mb-6 flex items-center gap-2 text-[#e8920a] font-semibold hover:-translate-x-1 transition"
+      >
+        ← Back to Cookbook
+      </button>
 
-      <div className="mt-4 flex gap-6 text-[#6f6258]">
-        <span>Preparation Time: {recipe.prepTime}</span>
-        <span>Cook Time: {recipe.cookTime}</span>
-        <span>Serving: {recipe.servings}</span>
+      {/* Recipe Header */}
+      <div className="rounded-3xl bg-white border border-[#e6d8c8] shadow-lg p-8">
+        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+          <div>
+            <h1 className="text-4xl font-bold text-[#2a1b17]">
+              {recipe.title}
+            </h1>
+
+            <p className="mt-2 text-[#6f6258]">
+              Delicious homemade recipe perfect for family meals.
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-4">
+              <div className="rounded-xl bg-amber-50 px-5 py-3">
+                <p className="text-sm text-gray-500">Prep Time</p>
+                <p className="font-semibold">{recipe.prepTime}</p>
+              </div>
+
+              <div className="rounded-xl bg-amber-50 px-5 py-3">
+                <p className="text-sm text-gray-500">Cook Time</p>
+                <p className="font-semibold">{recipe.cookTime}</p>
+              </div>
+
+              <div className="rounded-xl bg-amber-50 px-5 py-3">
+                <p className="text-sm text-gray-500">Servings</p>
+                <p className="font-semibold">{recipe.servings}</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3">
+            <button
+              onClick={handleWhatsAppShare}
+              className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-xl transition"
+            >
+              <FaWhatsapp size={18} />
+              Share
+            </button>
+
+            <button
+              onClick={async () => {
+                if (window.confirm("Delete this recipe?")) {
+                  await handleDelete();
+                }
+              }}
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
 
-      <h2 className="mt-6 text-xl font-semibold">
-        Ingredients
-      </h2>
-      <ul className="list-disc pl-5">
-        {recipe.ingredients.map((ingredient, index) => (
-          <li key={index}>
-            {ingredient}
-          </li>
-        ))}
-      </ul>
+      {/* Content */}
+      <div className="mt-8 grid gap-8 md:grid-cols-3">
+        {/* Ingredients */}
+        <div className="bg-white rounded-3xl border border-[#e6d8c8] shadow-lg p-6">
+          <h2 className="text-2xl font-bold mb-5">
+            Ingredients
+          </h2>
 
-      <h2 className="mt-6 text-xl font-semibold">
-        Instructions
-      </h2>
-      <ol className="list-decimal pl-5">
-        {recipe.instructions.map((instruction) => (
-          <li key={instruction.step}>
-            {instruction.text}
-          </li>
-        ))}
-      </ol>
+          <ul className="space-y-3">
+            {recipe.ingredients.map((ingredient, index) => (
+              <li
+                key={index}
+                className="bg-[#faf6f0] rounded-xl p-3"
+              >
+                • {ingredient}
+              </li>
+            ))}
+          </ul>
+        </div>
 
-      <div className="mt-6 flex justify-end gap-3">
-        <button
-          onClick={handleWhatsAppShare}
-          className="flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition"
-        >
-          <FaWhatsapp size={20} />
-          Share on WhatsApp
-        </button>
+        {/* Instructions */}
+        <div className="md:col-span-2 bg-white rounded-3xl border border-[#e6d8c8] shadow-lg p-6">
+          <h2 className="text-2xl font-bold mb-5">
+            Instructions
+          </h2>
 
-        <button
-          onClick={async () => {
-            if (window.confirm("Delete this recipe?")) {
-              await handleDelete();
-            }
-          }}
-          className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg transition"
-        >
-          Delete
-        </button>
+          <ol className="space-y-5">
+            {recipe.instructions.map((instruction) => (
+              <li
+                key={instruction.step}
+                className="flex gap-4"
+              >
+                <div className="h-8 w-8 shrink-0 rounded-full bg-[#e8920a] text-white flex items-center justify-center font-bold">
+                  {instruction.step}
+                </div>
+
+                <p className="pt-1 text-[#2a1b17]">
+                  {instruction.text}
+                </p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
-
     </div>
-  )
+  );
 }
 
 export default RecipeDetail
