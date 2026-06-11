@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import ChefHat from "../assets/ChefHat.png";
-import { FaRightFromBracketFaSignOutAlt } from "react-icons/fa6";
+import { FaRightFromBracket } from "react-icons/fa6";
 
 function Navbar() {
     const navigate = useNavigate();
@@ -62,7 +62,7 @@ function Navbar() {
             <div>
                 <NavLink onClick={handleLogout}>
                     <button className="bg-red-500 hover:bg-red-600 px-5 py-2 rounded-lg font-medium transition-all duration-200">
-                        <FaSignOutAlt />
+                        <FaRightFromBracket />
                     </button>
                 </NavLink>
             </div>
