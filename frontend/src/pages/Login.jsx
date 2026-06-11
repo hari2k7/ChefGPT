@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import api from "../services/api";
 import { useNavigate, Navigate } from "react-router-dom";
 import ChefHat from "../assets/ChefHat.png";
+import { GoogleLogin } from "@react-oauth/google";
 
 export default function Login() {
 
@@ -86,6 +87,38 @@ export default function Login() {
                     >
                         Sign in
                     </button>
+
+                    <div className="mt-4">
+                        <GoogleLogin
+                            onSuccess={async (credentialResponse) => {
+                                try {
+                                    const response = await api.post(
+                                        "/auth/google",
+                                        {
+                                            credential: credentialResponse.credential,
+                                        }
+                                    );
+
+                                    localStorage.setItem(
+                                        "token",
+                                        response.data.token
+                                    );
+
+                                    localStorage.setItem(
+                                        "user",
+                                        JSON.stringify(response.data.user)
+                                    );
+
+                                    navigate("/");
+                                } catch (err) {
+                                    console.error(err);
+                                }
+                            }}
+                            onError={() => {
+                                console.log("Google Login Failed");
+                            }}
+                        />
+                    </div>
                 </form>
 
                 <p className="mt-6 text-center text-sm text-stone-400">
