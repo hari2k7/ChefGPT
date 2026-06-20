@@ -62,7 +62,7 @@ ChefGPT/
 └── README.md
 ```
 
-## 🚀 Installation
+## Installation
 
 ### Clone Repository
 
@@ -114,7 +114,7 @@ npm run dev
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 ChefGPT uses JWT Authentication.
 
@@ -130,7 +130,7 @@ Users must log in before accessing these features.
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Login Page
 
@@ -154,7 +154,7 @@ Users must log in before accessing these features.
 
 ---
 
-## 🌟 Future Improvements
+## Future Improvements
 
 * Recipe Images
 * User Profiles
@@ -165,12 +165,12 @@ Users must log in before accessing these features.
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Hariharasudhan D**
 
 ---
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License.
