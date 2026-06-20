@@ -150,7 +150,7 @@ Users must log in before accessing these features.
 
 ### Recipe Detail Page
 
-![register image](./screenshots/recipedetail.png)
+![register image](./screenshots/RecipeDetail.png)
 
 ---
 
