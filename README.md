@@ -6,6 +6,7 @@ ChefGPT is an AI-powered recipe generator that helps users create delicious reci
 
 * AI-powered recipe generation using Groq LLM
 * JWT Authentication
+* Google OAuth Authentication
 * User Registration & Login
 * Personal Cookbook
 * Favorite Recipes
@@ -78,6 +79,13 @@ cd backend
 npm install
 ```
 
+### Configure Google Cloud Console
+1. Create a project in Google Cloud Console.
+2. Enable the Google Identity Services API.
+3. Create OAuth 2.0 credentials.
+4. Add authorized origins and redirect URIs.
+5. Copy the Client ID and Client Secret into your .env file.
+
 Create a `.env` file:
 
 ```env
@@ -85,6 +93,7 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 GROQ_API_KEY=your_groq_api_key
 JWT_SECRET=your_jwt_secret
+GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
 Start backend:
@@ -104,6 +113,7 @@ Create a `.env` file:
 
 ```env
 VITE_API_URL=http://localhost:5000/api
+VITE_GOOGLE_CLIENT_ID=your_google_client_id
 ```
 
 Start frontend:
@@ -116,7 +126,16 @@ npm run dev
 
 ## Authentication
 
-ChefGPT uses JWT Authentication.
+ChefGPT supports both JWT Authentication and Google OAuth 2.0 Authentication.
+
+## Authentication Methods
+### Email & Password Login
+
+Users can register and log in using their email address and password. Passwords are securely hashed using bcryptjs before being stored in the database.
+
+### Google Sign-In
+
+Users can also sign in securely using their Google account through OAuth 2.0. Upon successful authentication, a JWT token is generated and used to access protected routes.
 
 ### Protected Features
 
@@ -126,7 +145,7 @@ ChefGPT uses JWT Authentication.
 * Delete Recipes
 * View Recipe Details
 
-Users must log in before accessing these features.
+Users must authenticate using either Email/Password Login or Google Sign-In before accessing these features.
 
 ---
 
