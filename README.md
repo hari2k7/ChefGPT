@@ -2,6 +2,8 @@
 
 ChefGPT is an AI-powered recipe generator that helps users create delicious recipes instantly. Simply describe what you want to cook, and ChefGPT generates a detailed recipe with ingredients, instructions, cooking time, cuisine type, and more.
 
+Youtube demo: https://youtu.be/akd4I7Himyg?si=UUMeBUFlVKbVnsOD
+
 ## Features
 
 * AI-powered recipe generation using Groq LLM
